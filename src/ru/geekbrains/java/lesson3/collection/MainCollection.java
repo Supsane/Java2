@@ -1,6 +1,8 @@
 package ru.geekbrains.java.lesson3.collection;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 
 /**
  * Created by Евгений on 01.03.2017.
@@ -8,7 +10,6 @@ import java.util.ArrayList;
 public class MainCollection {
     public static void main(String[] args) {
         ArrayList<String> arrayList = new ArrayList<>();
-        ArrayList<String> unique = new ArrayList<>();
         arrayList.add("apple");
         arrayList.add("juice");
         arrayList.add("tomato");
@@ -20,14 +21,24 @@ public class MainCollection {
         arrayList.add("apple");
         arrayList.add("milk");
 
-        for (int i = 0; i < arrayList.size(); i++) {
-            String arrayList1 = arrayList.get(i);
-            for (String s : arrayList) {
-                if (!s.equals(arrayList1)) unique.add(s);
+        HashSet<String> hs = new HashSet<>();
+        hs.addAll(arrayList);
+
+        //список уникальных слов
+        System.out.println(hs);
+
+        //Сколько раз встречается каждое слово
+        HashMap<String, Integer> hashMap = new HashMap<>();
+        for (String s : arrayList) {
+            if (!hashMap.containsKey(s)) {
+                hashMap.put(s, 0);
             }
+            hashMap.put(s, hashMap.get(s) + 1);
         }
 
-        System.out.println(unique);
+        for (String word: hashMap.keySet()) {
+            System.out.println(word + " " + hashMap.get(word));
+        }
 
     }
 }
