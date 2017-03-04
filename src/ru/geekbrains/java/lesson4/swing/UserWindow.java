@@ -26,34 +26,30 @@ public class UserWindow extends JFrame {
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
         splitPane.setResizeWeight(1);
 
-        JScrollPane scrollBar = new JScrollPane();
+
         JPanel corPanel = new JPanel(new GridLayout(1, 1, 5, 0));
         corPanel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 5));
         JTextArea corresp = new JTextArea();
+        JScrollPane corScrloll = new JScrollPane(corresp);
         corresp.setLineWrap(true);
         corresp.setWrapStyleWord(true);
         corresp.setEditable(false);
-        corPanel.add(corresp);
-        corPanel.add(scrollBar);
-        splitPane.setTopComponent(corresp);
+        corPanel.add(corScrloll);
+        splitPane.setTopComponent(corPanel);
 
 
         JPanel sendPanel = new JPanel(new FlowLayout());
         sendPanel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 5));
         sendPanel.setBackground(Color.LIGHT_GRAY);
         JTextArea message = new JTextArea();
+        JScrollPane mesScrloll = new JScrollPane(message);
         message.setLineWrap(true);
         message.setWrapStyleWord(true);
-        message.setSize(440, 1);
-        sendPanel.add(message);
+        message.setSize(450, 100);
+        sendPanel.add(mesScrloll);
 
-        JPanel sendButton = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        sendButton.setBackground(Color.LIGHT_GRAY);
-        JPanel sendButton1 = new JPanel(new BorderLayout());
-        sendButton1.add(sendButton, BorderLayout.CENTER);
         JButton send = new JButton("Отправить");
-        sendButton.add(send);
-        sendPanel.add(sendButton);
+        sendPanel.add(send);
 
         splitPane.setBottomComponent(sendPanel);
 
@@ -75,3 +71,9 @@ public class UserWindow extends JFrame {
         });
     }
 }
+
+/*
+* ВОПРОСЫ
+* 1. Возможно ли размер поля где вводится сообщение привязать к размеру SplitPane
+* 2. возможно ли в поле где вводится сообщение показывать подсазку для пользователя (как в скайпе)
+* что сюда нужно вводить сообщение*/
