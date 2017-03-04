@@ -2,6 +2,8 @@ package ru.geekbrains.java.lesson4.swing;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * Created by chashurin on 03.03.2017.
@@ -22,27 +24,33 @@ public class UserWindow extends JFrame {
         mainPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
 
         JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-        splitPane.setResizeWeight(0.8);
+        splitPane.setResizeWeight(1);
 
+        JScrollPane scrollBar = new JScrollPane();
         JPanel corPanel = new JPanel(new GridLayout(1, 1, 5, 0));
         corPanel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 5));
         JTextArea corresp = new JTextArea();
         corresp.setLineWrap(true);
+        corresp.setWrapStyleWord(true);
+        corresp.setEditable(false);
         corPanel.add(corresp);
-        splitPane.setTopComponent(corPanel);
+        corPanel.add(scrollBar);
+        splitPane.setTopComponent(corresp);
 
 
-        JPanel sendPanel = new JPanel(new GridLayout(1,2));
+        JPanel sendPanel = new JPanel(new FlowLayout());
         sendPanel.setBorder(BorderFactory.createLineBorder(Color.WHITE, 5));
         sendPanel.setBackground(Color.LIGHT_GRAY);
         JTextArea message = new JTextArea();
         message.setLineWrap(true);
+        message.setWrapStyleWord(true);
+        message.setSize(440, 1);
         sendPanel.add(message);
 
         JPanel sendButton = new JPanel(new FlowLayout(FlowLayout.CENTER));
         sendButton.setBackground(Color.LIGHT_GRAY);
         JPanel sendButton1 = new JPanel(new BorderLayout());
-        sendButton1.add(sendButton, BorderLayout.SOUTH);
+        sendButton1.add(sendButton, BorderLayout.CENTER);
         JButton send = new JButton("Отправить");
         sendButton.add(send);
         sendPanel.add(sendButton);
@@ -55,5 +63,15 @@ public class UserWindow extends JFrame {
 
         add(indentPanel);
         setVisible(true);
+
+
+        send.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!message.getText().equals("")) corresp.setText(corresp.getText() + "\n" + message.getText());
+                message.setText("");
+                message.grabFocus();
+            }
+        });
     }
 }
