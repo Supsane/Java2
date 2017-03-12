@@ -59,6 +59,7 @@ public class UserWindow extends JFrame {
 
         add(indentPanel);
         setVisible(true);
+        message.grabFocus();
 
 
         send.addActionListener(new ActionListener() {
