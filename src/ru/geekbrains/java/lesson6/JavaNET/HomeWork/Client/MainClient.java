@@ -16,12 +16,12 @@ public class MainClient {
             DataOutputStream out = new DataOutputStream(socket.getOutputStream());
             Scanner sc = new Scanner(System.in);
             while (true) {
-                String messageServer = in.readUTF();
-                System.out.println(messageServer);
-                if (messageServer.equals("end")) break;
                 String message = sc.nextLine();
                 out.writeUTF(message);
                 if (message.equals("end")) break;
+                String messageServer = in.readUTF();
+                System.out.println(messageServer);
+                if (messageServer.equals("end")) break;
             }
 
         } catch (IOException e) {
