@@ -47,7 +47,12 @@ public class ClientHandler {
                         String str = in.readUTF();
                         System.out.println("from " + name + ": " + str);
                         if (str.equals("/end")) break;
-                        myServer.broadcastMsg(name + ": " + str);
+                        String[] parts = str.split("\\s");
+                        if (parts[0].equals("/w")) {
+                            myServer.privateMsg(parts[1], parts[2]);
+                        } else {
+                            myServer.broadcastMsg(name + ": " + str);
+                        }
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
